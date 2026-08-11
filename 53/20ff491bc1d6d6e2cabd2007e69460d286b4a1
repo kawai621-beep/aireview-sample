@@ -1,0 +1,25 @@
+docs/06-PR分割と比較フロー.md
+  s_4f949ae6d48808::t_c7320c62f3ea73 36
+  s_4f949ae6d48808::t_9c1e330bd71b69 125
+docs/05-埋め込んだ問題一覧.md
+  s_4f949ae6d48808::t_d1bf319c5c0b96 309-312
+  s_4f949ae6d48808::t_0c3acca961d3c6 286-293,303
+  s_4f949ae6d48808::t_f5fe0254fb2c37 294-302,308
+  s_4f949ae6d48808::t_8f47c4ab0acff4 304-307
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "5320ff491bc1d6d6e2cabd2007e69460d286b4a1",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
