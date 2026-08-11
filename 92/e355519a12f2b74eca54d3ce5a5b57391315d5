@@ -1,0 +1,81 @@
+client/tsconfig.json
+  s_4f949ae6d48808::t_37543d04c8b184 1-14
+shared/types.ts
+  s_4f949ae6d48808::t_f2d5495c058939 1-41
+docs/02-アーキテクチャ.md
+  s_4f949ae6d48808::t_695bef78d45d18 1-97
+server/tsconfig.json
+  s_4f949ae6d48808::t_843379724648c2 1-11
+docs/04-API仕様.md
+  s_4f949ae6d48808::t_37a2ad821fb247 1-165
+docs/06-PR分割と比較フロー.md
+  s_4f949ae6d48808::t_1bb8981ac9b120 1-41,43,45,48-126
+  s_4f949ae6d48808::t_05ad55495fcc1d 42,44,46-47
+.gitignore
+  s_4f949ae6d48808::t_59add8f13c9c6d 1-25
+server/src/config.ts
+  s_4f949ae6d48808::t_cc3c8c7f78c725 1-11
+client/vite.config.ts
+  s_4f949ae6d48808::t_c09a67b7bf1365 1-14
+docs/07-採点方法.md
+  s_4f949ae6d48808::t_abfb9148b77d58 1-165
+docs/05-埋め込んだ問題一覧.md
+  s_4f949ae6d48808::t_13baa70c53f1c9 1-32,34,36-191,193-300,302-318
+  s_4f949ae6d48808::t_f56a9ae7f8e95b 192
+  s_4f949ae6d48808::t_79538bb1fcb4bf 33,35
+  s_4f949ae6d48808::t_47746e1d713423 301
+.eslintrc.cjs
+  s_4f949ae6d48808::t_23b7f944a33da2 1-32
+server/src/index.ts
+  s_4f949ae6d48808::t_40b1555ce7d0c3 1-9
+docs/03-データモデル.md
+  s_4f949ae6d48808::t_cdf1c5274f77ab 1-110
+docs/00-目的と方針.md
+  s_4f949ae6d48808::t_35a46be62df4bd 1-73
+docs/01-技術スタック.md
+  s_4f949ae6d48808::t_57ee8a7a92290d 1-79
+server/src/db/prisma.ts
+  s_4f949ae6d48808::t_88d6c836cd8c3f 1-16
+client/package.json
+  s_4f949ae6d48808::t_16f81f79c80905 1-25
+shared/package.json
+  s_4f949ae6d48808::t_a77cc64547d986 1-7
+server/package.json
+  s_4f949ae6d48808::t_a3e2f1dd748d8d 1-31
+README.md
+  s_4f949ae6d48808::t_410a436794456f 1-42
+client/src/main.tsx
+  s_4f949ae6d48808::t_f986e760be2fa8 1-12
+server/.env.example
+  s_4f949ae6d48808::t_ff1e547b92d13a 1-5
+.prettierrc
+  s_4f949ae6d48808::t_f085e7ebfaa5c5 1-7
+server/src/app.ts
+  s_4f949ae6d48808::t_a39b13b3a0dc9b 1-26
+package.json
+  s_4f949ae6d48808::t_4bddaee4352ccd 1-28
+tsconfig.base.json
+  s_4f949ae6d48808::t_4428033c1aeaba 1-13
+server/prisma/schema.prisma
+  s_4f949ae6d48808::t_25f6f9e3c80035 1-59
+client/index.html
+  s_4f949ae6d48808::t_ec1af6a9b38ba4 1-12
+client/src/App.tsx
+  s_4f949ae6d48808::t_91f46dfa0bb36d 1-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "92e355519a12f2b74eca54d3ce5a5b57391315d5",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
