@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# CodeRabbit 設定
+# stacked PR 運用のため、デフォルトブランチ(main)以外の base ブランチ
+# (baseline, feature/*) に向けた PR も自動レビュー対象にする。
+reviews:
+  auto_review:
+    enabled: true
+    base_branches:
+      - "baseline"
+      - "feature/.*"
