@@ -1,0 +1,30 @@
+server/src/services/feed.service.ts
+  s_4f949ae6d48808::t_eb723d62385632 1-13
+server/src/routes/comments.routes.ts
+  s_4f949ae6d48808::t_1bbf8464ca58c3 1-12
+server/src/routes/posts.routes.ts
+  s_4f949ae6d48808::t_75485a85eea0aa 159
+  s_4f949ae6d48808::t_de28336e576078 1-158,160-165
+server/src/app.ts
+  s_4f949ae6d48808::t_b93c3f0408994d 7-8,32-33
+server/src/services/search.service.ts
+  s_4f949ae6d48808::t_4d55440930e3ed 1-10
+server/src/services/posts.service.ts
+  s_4f949ae6d48808::t_b4905538dba167 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "100fc8a1a1305298cd23acf8ff6abf09230d25a4",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
