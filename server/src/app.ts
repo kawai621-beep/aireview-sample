@@ -1,19 +1,22 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import { config } from './config';
+import { authRouter } from './routes/auth.routes';
+import { adminRouter } from './routes/admin.routes';
 
 /**
- * Express アプリケーションを構築する（ベースライン: 健康な骨組み）。
- * 各 feature ブランチでルータが追加される。
+ * Express アプリケーションを構築する。
  */
 export function createApp(): express.Application {
   const app = express();
 
   app.use(express.json());
+  app.use(cookieParser());
 
-  // ベースライン: 許可リスト方式（クリーン）。
   app.use(
     cors({
-      origin: ['http://localhost:5173'],
+      origin: config.corsOrigin,
       credentials: true,
     }),
   );
@@ -21,6 +24,9 @@ export function createApp(): express.Application {
   app.get('/health', (_req: Request, res: Response) => {
     res.json({ status: 'ok' });
   });
+
+  app.use('/api/auth', authRouter);
+  app.use('/api/admin', adminRouter);
 
   return app;
 }
