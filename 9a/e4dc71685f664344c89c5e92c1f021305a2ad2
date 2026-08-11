@@ -1,0 +1,33 @@
+server/src/config.ts
+  s_4f949ae6d48808::t_ccae3988e078c2 2,8-13
+server/src/app.ts
+  s_4f949ae6d48808::t_6d96ab035274a0 3-6,9,15,19,28-29
+server/src/auth/middleware.ts
+  s_4f949ae6d48808::t_4d6b1926897206 1-21
+server/src/services/users.service.ts
+  s_4f949ae6d48808::t_d207166e6ab913 1-24
+server/src/auth/jwt.ts
+  s_4f949ae6d48808::t_dbb396f483fce7 1-12
+server/src/routes/admin.routes.ts
+  s_4f949ae6d48808::t_46bf0aea1d3e5f 1-12
+server/src/auth/password.ts
+  s_4f949ae6d48808::t_26dec0ab7c8c13 1-8
+server/src/routes/auth.routes.ts
+  s_4f949ae6d48808::t_727e57f5a4af77 1-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9ae4dc71685f664344c89c5e92c1f021305a2ad2",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
