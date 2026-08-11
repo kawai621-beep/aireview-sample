@@ -1,0 +1,27 @@
+server/src/app.ts
+  s_4f949ae6d48808::t_3e099d97a6d91c 5-6,11,29-30,39-41
+server/src/middleware/error.ts
+  s_4f949ae6d48808::t_282dfc241dbcdf 1-15
+server/src/services/export.service.ts
+  s_4f949ae6d48808::t_65c6699759ca9e 1-16
+server/src/middleware/logger.ts
+  s_4f949ae6d48808::t_1395c7d9168ea7 1-10
+server/src/routes/debug.routes.ts
+  s_4f949ae6d48808::t_aadb39ebdf0a85 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "c43b46fbab08dbcbb3d56f29d57f141a66186cf4",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
