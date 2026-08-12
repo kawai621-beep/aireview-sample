@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  quality-gate:
+    name: 品質ゲート（型チェック + 危険パターン）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 依存関係インストール
+        run: npm ci
+
+      - name: Prisma Client 生成
+        run: npx prisma generate --schema=server/prisma/schema.prisma
+        env:
+          DATABASE_URL: 'file:./dev.db'
+
+      # Layer3: 機械的チェック（AIが取りこぼしやすい問題も確実に止める）
+      - name: 型チェック (tsc --noEmit)
+        run: npm run typecheck
+
+      - name: 危険パターンの grep ゲート
+        run: |
+          set +e
+          fail=0
+          # SQLi（$queryRawUnsafe の文字列結合）
+          if git grep -nE '\$queryRawUnsafe' -- '*.ts' '*.tsx'; then
+            echo "::error::\$queryRawUnsafe が検出されました（SQLインジェクション リスク）。パラメータ化（\$queryRaw）または Prisma の where を使ってください。"
+            fail=1
+          fi
+          # XSS（dangerouslySetInnerHTML の無サニタイズ）
+          if git grep -nE 'dangerouslySetInnerHTML' -- '*.ts' '*.tsx'; then
+            echo "::error::dangerouslySetInnerHTML が検出されました（XSS リスク）。DOMPurify 等でサニタイズしてください。"
+            fail=1
+          fi
+          # 型安全（@ts-ignore / @ts-nocheck）
+          if git grep -nE '@ts-ignore|@ts-nocheck' -- '*.ts' '*.tsx'; then
+            echo "::error::@ts-ignore / @ts-nocheck が検出されました。型エラーを解消してください。"
+            fail=1
+          fi
+          # ハードコード秘密（簡易）
+          if git grep -nE "(api[_-]?key|secret|token|password)\s*[:=]\s*['\"][^'\"]{8,}" -- '*.ts' '*.tsx' | grep -vE '(process\.env|//|test|spec)'; then
+            echo "::warning::ハードコードされた秘密らしき文字列が検出されました。env 変数化を確認してください。"
+          fi
+          exit $fail
+
+      - name: AI セルフレビューの提醒
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "::notice::この PR の本質レビュー（N+1・レース・認可・タイミング・TZ 等）は AI セルフレビュー（Claude Code: /self-review）または人間のレビューで確認してください。CI は型チェックと危険パターンの grep のみを担保します。"

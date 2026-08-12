@@ -14,7 +14,8 @@
     "build": "npm run build -w server && npm run build -w client",
     "typecheck": "npm run typecheck -w server && npm run typecheck -w client",
     "db:generate": "npm run db:generate -w server",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
@@ -23,6 +24,7 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.0",
+    "husky": "^9.1.0",
     "typescript": "^5.4.0"
   }
 }

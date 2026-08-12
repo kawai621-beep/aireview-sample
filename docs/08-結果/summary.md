@@ -103,3 +103,45 @@
 - [ ] **運用**: 認証系にレートリミット/ロックはあるか。ログに機密が混じっていないか。
 - [ ] **エラー**: 内部情報（stack/message）を応答に漏らしていないか。asyncの例外は握りつぶしていないか。
 - [ ] **型・規律**: `any`/`@ts-ignore` はないか。長大関数・重複はないか。
+
+---
+
+## 7. セルフレビュー強制の仕組み（実装）
+
+§6 のガイドを「PR前に必ず実行される」仕組みとして実装した。3層ゲート構成で、Claude Code / Codex / CLI いずれでも動く。
+
+### 7.1 全体構成
+```
+PR作成 → [Layer1] AIセルフレビュー(/self-review) → [Layer2] pre-pushゲート → [Layer3] CI
+```
+
+### 7.2 各層の実装
+- **Layer1 AIセルフレビュー**: `.claude/commands/self-review.md`（Claude Code）
+  - `git diff` を取得し `docs/pr-self-review-checklist.md` を適用して評価。
+  - 結果を `.self-review/<sha>.json`（`status: pass|fail` + `findings`）に保存。
+  - Codex では `AGENTS.md` 等に同手順を記述して再現。
+- **Layer2 pre-pushゲート（ツール非依存）**: `.husky/pre-push`
+  - `git push` 時に `.self-review/<sha>.json` を検証。未実施/fail なら `exit 1` でブロック。
+  - Claude Code / Codex / CLI のすべての push に効く（git フックのため）。
+  - 緊急時は `SKIP_SELF_REVIEW=1 git push` でスキップ可。
+- **Layer3 CI**: `.github/workflows/ci.yml`
+  - `tsc --noEmit`（型チェック）+ 危険パターンの grep（`$queryRawUnsafe` / `dangerouslySetInnerHTML` / `@ts-ignore` / 秘密らしき文字列）。
+  - AI が取りこぼしやすい問題も機械的に止める最終砦。
+
+### 7.3 機械 vs AI の分担
+| 観点 | 担当 |
+|---|---|
+| `@ts-ignore` / `any` / 型エラー | CI（機械: tsc/grep） |
+| `$queryRawUnsafe` / `dangerouslySetInnerHTML` / 秘密 | CI grep（機械） |
+| **N+1・レース・タイミング・認可・TZ・長大関数** | **Layer1 AI（チェックリスト駆動）** |
+| **レートリミット等の運用系（A7）** | **Layer1 AI + 人間の目** |
+
+### 7.4 エンジニアの使い方
+1. PR前に Claude Code で `/self-review` を実行。
+2. `findings` があれば修正 → 再 `/self-review`。
+3. `status: pass` になったら `git push`（`.husky/pre-push` が通す）。
+4. CI が最終確認。
+
+### 7.5 補足
+- `.claude/hooks/pr-gate.sh` も同内容のゲートを PreToolUse フック向けに用意済み。有効化するには `.claude/settings.json` の `hooks` に登録する（Self-Modification 制約で本リポジトリでは未登録。必要に応じて各人が有効化）。
+- `.self-review/` は `.gitignore` 対象（ローカルの一時成果物）。
