@@ -1,0 +1,19 @@
+docs/08-結果/summary.md
+  s_4f949ae6d48808::t_e0093c2935d0d4 78-105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "39dae6136c783c6ef466782e245cf029199d3413",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
