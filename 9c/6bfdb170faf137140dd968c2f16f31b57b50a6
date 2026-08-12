@@ -1,0 +1,27 @@
+docs/08-結果/coderabbit/PR-1.md
+  s_4f949ae6d48808::t_bba8b636c5f068 1-578
+docs/08-結果/coderabbit/PR-2.md
+  s_4f949ae6d48808::t_847ddf42b1e0b5 1-1023
+docs/08-結果/coderabbit/PR-3.md
+  s_4f949ae6d48808::t_4c66ef2432ebb8 1-775
+docs/08-結果/coderabbit/PR-4.md
+  s_4f949ae6d48808::t_03898ab0f46ac9 1-522
+docs/08-結果/summary.md
+  s_4f949ae6d48808::t_bfa25350eb0118 12-38,40,42-50,52,54-57,59-62,64,66,68-69,71-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9c6bfdb170faf137140dd968c2f16f31b57b50a6",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
