@@ -1,0 +1,34 @@
+package.json
+  s_4f949ae6d48808::t_9b1a4ff961cc4f 27
+  s_4f949ae6d48808::t_04de548a33b808 17-18
+.husky/pre-push
+  s_4f949ae6d48808::t_3ae1eee020c14d 1-31
+.github/workflows/ci.yml
+  s_4f949ae6d48808::t_ffad9efc75470b 1-59
+docs/08-結果/summary.md
+  s_4f949ae6d48808::t_55c90c92ba1a22 106-147
+.claude/commands/self-review.md
+  s_4f949ae6d48808::t_41b8f20e7723ef 1-33
+docs/pr-self-review-checklist.md
+  s_4f949ae6d48808::t_1a75fa9ab28dc9 1-55
+.gitignore
+  s_4f949ae6d48808::t_c06d9a1c6cbd5b 26-28
+.claude/hooks/pr-gate.sh
+  s_4f949ae6d48808::t_50e6fe79071ee2 1-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "028676274fd0ef56997d25db577c2e2cf49179de",
+  "prompts": {},
+  "sessions": {
+    "s_4f949ae6d48808": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5a836e9-59b0-4658-b32f-324f9903fa14",
+        "model": "glm-5.2"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
