@@ -42,7 +42,9 @@ export function PostsPage() {
   if (error) {
     return <p style={{ color: '#c00' }}>エラー: {error}</p>;
   }
-  if (posts.length === 0) {
+  // 空状態の早期リターンは1ページ目のみ。2ページ目以降が空になった場合は
+  // ページング操作を表示して戻れるようにする。
+  if (posts.length === 0 && page === 1) {
     return <p>まだ投稿がありません。</p>;
   }
 

@@ -58,6 +58,24 @@ export function PostDetailPage() {
         {post.likes}
       </p>
       <div style={{ whiteSpace: 'pre-wrap', lineHeight: 1.7 }}>{post.content}</div>
+      <section style={{ marginTop: 24 }}>
+        <h3 style={{ fontSize: 16 }}>コメント（{post.comments?.length ?? 0}）</h3>
+        {post.comments === undefined ? null : post.comments.length === 0 ? (
+          <p style={{ color: '#666' }}>まだコメントはありません。</p>
+        ) : (
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {post.comments.map((comment) => (
+              <li key={comment.id} style={{ padding: '8px 0', borderTop: '1px solid #eee' }}>
+                <p style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{comment.content}</p>
+                <p style={{ margin: 0, color: '#666', fontSize: 12 }}>
+                  {comment.author?.name ?? '不明'} ・{' '}
+                  {new Date(comment.createdAt).toLocaleString('ja-JP')}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
       <hr style={{ margin: '24px 0' }} />
       <Link to="/posts">← 一覧に戻る</Link>
     </article>
