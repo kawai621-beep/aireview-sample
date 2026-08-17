@@ -1,0 +1,25 @@
+server/src/app.ts
+  s_b8f1c337d5c9ee::t_602461993ec3e5 3,6,25
+server/src/routes/posts.ts
+  s_b8f1c337d5c9ee::t_602461993ec3e5 1-65,69-124,130-177,183-208,214-217
+  s_b8f1c337d5c9ee::t_8f72ef3fa291ed 209-213
+  s_b8f1c337d5c9ee::t_2b08e3fe1dde20 66-68
+  s_b8f1c337d5c9ee::t_3b07b77c09e071 178-182
+  s_b8f1c337d5c9ee::t_a2a6f488a4fef6 125-129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "d1eb9cf0c72d369f9574e94cb2d495f495a172fb",
+  "prompts": {},
+  "sessions": {
+    "s_b8f1c337d5c9ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b24280e-f62f-4e6d-adb8-6796432dda0f",
+        "model": "glm-5.3"
+      },
+      "human_author": null
+    }
+  }
+}
