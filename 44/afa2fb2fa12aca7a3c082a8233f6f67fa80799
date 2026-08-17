@@ -1,0 +1,41 @@
+client/src/pages/PostsPage.tsx
+  s_b8f1c337d5c9ee::t_129ca301ebedd8 1-52,57-60,63-80
+  s_b8f1c337d5c9ee::t_bcc138662b139b 53-56,61-62
+server/src/routes/posts.ts
+  s_b8f1c337d5c9ee::t_9bfbc5b78c9799 1-201
+server/src/app.ts
+  s_b8f1c337d5c9ee::t_058717d48716f3 3,6,25
+shared/types.ts
+  s_b8f1c337d5c9ee::t_b3bfc3b2c05966 2,4-5,8-9,40-58
+shared/api.ts
+  s_b8f1c337d5c9ee::t_043d6b6e402f23 1-29
+client/src/pages/PostDetailPage.tsx
+  s_b8f1c337d5c9ee::t_2c7f7fd1729444 1-56,59-65
+  s_b8f1c337d5c9ee::t_bcc138662b139b 57-58
+client/src/api/posts.ts
+  s_b8f1c337d5c9ee::t_bcc138662b139b 56-59
+  s_b8f1c337d5c9ee::t_705fc83910886f 1-55,60-86
+server/src/db/prisma.ts
+  s_b8f1c337d5c9ee::t_bcc138662b139b 7
+client/src/App.tsx
+  s_b8f1c337d5c9ee::t_020dfc15ea346c 2-3,6,14,16,21-22,29
+  s_b8f1c337d5c9ee::t_bcc138662b139b 10-12
+client/src/vite-env.d.ts
+  s_b8f1c337d5c9ee::t_ebaedccd5451b7 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "44afa2fb2fa12aca7a3c082a8233f6f67fa80799",
+  "prompts": {},
+  "sessions": {
+    "s_b8f1c337d5c9ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b24280e-f62f-4e6d-adb8-6796432dda0f",
+        "model": "glm-5.3"
+      },
+      "human_author": null
+    }
+  }
+}
