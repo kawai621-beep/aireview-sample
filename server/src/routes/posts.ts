@@ -16,8 +16,9 @@ function validatePostInput(body: unknown): { title: string; content: string } | 
   if (typeof title !== 'string' || title.trim().length === 0) {
     return { error: 'title は必須です' };
   }
-  if (title.length > 200) {
-    return { error: 'title は200文字以内にしてください' };
+  // 上限はトリム後の長さで判定する（PATCH 側の検証と同一基準）。
+  if (title.trim().length > 200) {
+    return { error: 'title は1〜200文字にしてください' };
   }
   if (typeof content !== 'string' || content.trim().length === 0) {
     return { error: 'content は必須です' };
