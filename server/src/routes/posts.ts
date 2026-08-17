@@ -58,10 +58,24 @@ postsRouter.post('/', async (req: Request, res: Response) => {
   }
 });
 
+/** ページング用の正整数パラメータを解析する。不正値は 400 を返すために null。 */
+function parsePositiveInt(value: unknown): number | null {
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 1) {
+    return null;
+  }
+  return n;
+}
+
 /** 公開済み投稿の一覧を返す（GET /api/posts）。ページング対応。 */
 postsRouter.get('/', async (req: Request, res: Response) => {
-  const page = Math.max(1, Number(req.query.page ?? 1) || 1);
-  const pageSize = Math.min(50, Math.max(1, Number(req.query.pageSize ?? 20) || 20));
+  const page = parsePositiveInt(req.query.page ?? 1);
+  const pageSize = parsePositiveInt(req.query.pageSize ?? 20);
+  if (page === null || pageSize === null) {
+    res.status(400).json({ error: 'page / pageSize は正の整数で指定してください' });
+    return;
+  }
+  const cappedPageSize = Math.min(50, pageSize);
 
   // 一覧は常に公開済みのみ。未公開の下書きは GET /:id で作者本人のみ閲覧可能。
   // （includeDrafts のような全下書きを露出する挙動は認可なしには安全に提供できないため持たない）
@@ -72,15 +86,20 @@ postsRouter.get('/', async (req: Request, res: Response) => {
       prisma.post.findMany({
         where,
         orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * pageSize,
-        take: pageSize,
+        skip: (page - 1) * cappedPageSize,
+        take: cappedPageSize,
         include: { author: { select: { id: true, name: true } } },
       }),
       prisma.post.count({ where }),
     ]);
     res.json({
       posts,
-      pagination: { page, pageSize, total, totalPages: Math.ceil(total / pageSize) },
+      pagination: {
+        page,
+        pageSize: cappedPageSize,
+        total,
+        totalPages: Math.ceil(total / cappedPageSize),
+      },
     });
   } catch (err) {
     console.error('[posts] list 失敗:', err);
@@ -138,8 +157,12 @@ postsRouter.patch('/:id', async (req: Request, res: Response) => {
   const body = (req.body ?? {}) as Record<string, unknown>;
   const data: { title?: string; content?: string; published?: boolean } = {};
   if (body.title !== undefined) {
-    if (typeof body.title !== 'string' || body.title.trim().length === 0) {
-      res.status(400).json({ error: 'title が不正です' });
+    if (
+      typeof body.title !== 'string' ||
+      body.title.trim().length === 0 ||
+      body.title.trim().length > 200
+    ) {
+      res.status(400).json({ error: 'title は1〜200文字にしてください' });
       return;
     }
     data.title = body.title.trim();
@@ -203,7 +226,13 @@ postsRouter.delete('/:id', async (req: Request, res: Response) => {
       res.status(403).json({ error: '他の作者の投稿は削除できません' });
       return;
     }
-    await prisma.post.delete({ where: { id } });
+    // Comment.post / Like.post の onDelete はデフォルト（Restrict）のため、
+    // 先に関連レコードを消さないと FK 違反（P2003）で 500 になる。トランザクションでまとめる。
+    await prisma.$transaction([
+      prisma.comment.deleteMany({ where: { postId: id } }),
+      prisma.like.deleteMany({ where: { postId: id } }),
+      prisma.post.delete({ where: { id } }),
+    ]);
     res.status(204).send();
   } catch (err) {
     // 所有権チェックと削除の間に削除済みになった場合は 404 として扱う（冪等）。
