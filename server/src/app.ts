@@ -1,5 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
+import { config, isProduction } from './config';
+import { requestLogger } from './middleware/requestLogger';
 
 /**
  * Express アプリケーションを構築する（ベースライン: 健康な骨組み）。
@@ -7,6 +9,11 @@ import cors from 'cors';
  */
 export function createApp(): express.Application {
   const app = express();
+
+  // 開発環境でのみリクエストログを出力する。
+  if (!isProduction) {
+    app.use(requestLogger);
+  }
 
   app.use(express.json());
 
@@ -19,7 +26,11 @@ export function createApp(): express.Application {
   );
 
   app.get('/health', (_req: Request, res: Response) => {
-    res.json({ status: 'ok' });
+    res.json({
+      status: 'ok',
+      environment: config.nodeEnv,
+      uptimeSeconds: Math.floor(process.uptime()),
+    });
   });
 
   return app;
