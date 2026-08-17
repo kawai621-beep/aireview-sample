@@ -7,14 +7,22 @@ import type { NextFunction, Request, Response } from 'express';
  */
 export function requestLogger(req: Request, res: Response, next: NextFunction): void {
   const startNs = process.hrtime.bigint();
+  let logged = false;
 
-  res.on('finish', () => {
+  // finish はレスポンス完了、close はクライアント中断でも発火する。
+  // 両方に登録し、先に発火した1回だけ記録する（二重ログ防止）。
+  const log = (aborted: boolean) => {
+    if (logged) return;
+    logged = true;
     const durationMs = Number(process.hrtime.bigint() - startNs) / 1e6;
     // originalUrl ではなく path を使う: クエリストリングに機密値が入り得るため出力しない。
     console.log(
-      `[dev] ${req.method} ${req.path} -> ${res.statusCode} (${durationMs.toFixed(1)}ms)`,
+      `[dev] ${req.method} ${req.path} -> ${res.statusCode}${aborted ? ' (aborted)' : ''} (${durationMs.toFixed(1)}ms)`,
     );
-  });
+  };
+
+  res.on('finish', () => log(false));
+  res.on('close', () => log(true));
 
   next();
 }

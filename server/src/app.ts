@@ -10,8 +10,9 @@ import { requestLogger } from './middleware/requestLogger';
 export function createApp(): express.Application {
   const app = express();
 
-  // 開発環境でのみリクエストログを出力する。
-  if (!isProduction) {
+  // 開発環境（NODE_ENV=development）でのみリクエストログを出力する。
+  // !isProduction だと test/staging 等でも有効になるため、明示的に開発環境と比較する。
+  if (config.nodeEnv === 'development') {
     app.use(requestLogger);
   }
 
@@ -26,11 +27,17 @@ export function createApp(): express.Application {
   );
 
   app.get('/health', (_req: Request, res: Response) => {
-    res.json({
-      status: 'ok',
-      environment: config.nodeEnv,
-      uptimeSeconds: Math.floor(process.uptime()),
-    });
+    // 本番では status のみ返す。environment / uptime は公開エンドポイントからの
+    // デプロイメタデータの露出を避けるため、本番以外に限定する。
+    res.json(
+      isProduction
+        ? { status: 'ok' }
+        : {
+            status: 'ok',
+            environment: config.nodeEnv,
+            uptimeSeconds: Math.floor(process.uptime()),
+          },
+    );
   });
 
   return app;
