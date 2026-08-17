@@ -18,12 +18,12 @@ export interface ApiFailure {
 /** API 応答の判別可能な union。 */
 export type ApiResult<T> = ApiSuccess<T> | ApiFailure;
 
-/** ApiResult を構築する（成功側）。 */
-export function success<T>(data: T): ApiSuccess<T> {
+/** ApiResult を構築する（成功側）。api 接頭辞で汎用名の衝突を避ける。 */
+export function apiSuccess<T>(data: T): ApiSuccess<T> {
   return { ok: true, data };
 }
 
-/** ApiResult を構築する（失敗側）。 */
-export function failure(error: string): ApiFailure {
+/** ApiResult を構築する（失敗側）。api 接頭辞で汎用名の衝突を避ける。 */
+export function apiFailure(error: string): ApiFailure {
   return { ok: false, error };
 }
