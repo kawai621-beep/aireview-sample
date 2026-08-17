@@ -1,9 +1,9 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
+import { postsRouter } from './routes/posts';
 
 /**
- * Express アプリケーションを構築する（ベースライン: 健康な骨組み）。
- * 各 feature ブランチでルータが追加される。
+ * Express アプリケーションを構築する（投稿APIを追加）。
  */
 export function createApp(): express.Application {
   const app = express();
@@ -21,6 +21,8 @@ export function createApp(): express.Application {
   app.get('/health', (_req: Request, res: Response) => {
     res.json({ status: 'ok' });
   });
+
+  app.use('/api/posts', postsRouter);
 
   return app;
 }
