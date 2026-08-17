@@ -1,0 +1,22 @@
+server/src/middleware/requestLogger.ts
+  s_b8f1c337d5c9ee::t_56cee1bb0985a2 5
+  s_b8f1c337d5c9ee::t_a8bf6a4da2cbae 1-4,6-19
+server/src/app.ts
+  s_b8f1c337d5c9ee::t_9b71b2fbf97004 3-4,7,13-17,29-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "72e22cc3e9314ecd93012f7484bba001e36c5a49",
+  "prompts": {},
+  "sessions": {
+    "s_b8f1c337d5c9ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b24280e-f62f-4e6d-adb8-6796432dda0f",
+        "model": "glm-5.3"
+      },
+      "human_author": "takezou621 <takezou621@gmail.com>"
+    }
+  }
+}
